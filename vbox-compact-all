@@ -1,0 +1,9 @@
+#!/bin/sh
+export IFS=$'\n'
+CMDNAME=`basename $0`
+
+vbox="VBoxManage"
+
+for uuid in `${vbox} list hdds | grep ^UUID | sed -e "s/  */ /g" | cut -d " " -f 2` ; do
+	${vbox} modifyhd ${uuid} --compact
+done

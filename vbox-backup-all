@@ -1,0 +1,12 @@
+#!/bin/bash
+export IFS=$'\n'
+CMDNAME=`basename $0`
+DST_DIR=`pwd`
+if [ $# -eq 1 ]; then
+	DST_DIR=$1
+fi
+for vms in `vboxmanage list vms | cut -d "\"" -f 2`
+do
+	echo ${vms}
+	vboxmanage export ${vms} -o ${DTS_DIR}/${vms}.ova
+done
